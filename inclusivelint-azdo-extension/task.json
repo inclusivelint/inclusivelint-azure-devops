@@ -1,0 +1,31 @@
+{
+    "$schema": "https://raw.githubusercontent.com/Microsoft/azure-pipelines-task-lib/master/tasks.schema.json",
+    "id": "6464f8cb-cca3-443c-b1b7-222de4762808",
+    "name": "inclusivelint",
+    "friendlyName": "inclusivelint",
+    "description": "Azure DevOps extension for running the inclusivelint code on Azure DevOps easily",
+    "helpMarkDown": "",
+    "category": "Utility",
+    "author": "inclusivelint",
+    "version": {
+        "Major": 0,
+        "Minor": 1,
+        "Patch": 0
+    },
+    "instanceNameFormat": "Run inclusivelint",
+    "inputs": [
+        {
+            "name": "path",
+            "type": "string",
+            "label": "Path that inclusivelint will run",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Path that inclusivelint will run"
+        }
+    ],
+    "execution": {
+        "Node10": {
+            "target": "index.js"
+        }
+    }
+}

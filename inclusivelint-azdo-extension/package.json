@@ -1,0 +1,29 @@
+{
+  "name": "inclusivelint-azdo-extension",
+  "version": "1.0.0",
+  "description": "package that holds all the code for the azure devops extension of inclusivelint",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/inclusivelint/inclusivelint-azure-devops.git"
+  },
+  "keywords": [
+    "linter"
+  ],
+  "author": "inclusivelint",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/inclusivelint/inclusivelint-azure-devops/issues"
+  },
+  "homepage": "https://github.com/inclusivelint/inclusivelint-azure-devops#readme",
+  "dependencies": {
+    "azure-pipelines-task-lib": "^3.0.6-preview.0"
+  },
+  "devDependencies": {
+    "@types/node": "^14.14.6",
+    "@types/q": "^1.5.4"
+  }
+}
