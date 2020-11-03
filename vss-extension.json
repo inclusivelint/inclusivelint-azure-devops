@@ -1,0 +1,36 @@
+{
+    "manifestVersion": 1,
+    "id": "inclusivelint",
+    "name": "Inclusivelint on AzDO Extension",
+    "version": "0.0.1",
+    "publisher": "inclusivelint",
+    "targets": [
+        {
+            "id": "Microsoft.VisualStudio.Services"
+        }
+    ],    
+    "description": "Inclusivelint task on AzDO pipelines.",
+    "categories": [
+        "Azure Pipelines"
+    ],
+    "icons": {
+        "default": "images/extension-icon.png"        
+    },
+    "files": [
+        {
+            "path": "buildAndReleaseTask"
+        }
+    ],
+    "contributions": [
+        {
+            "id": "custom-build-release-task",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "inclusivelint-azdo-extension"
+            }
+        }
+    ]
+}
