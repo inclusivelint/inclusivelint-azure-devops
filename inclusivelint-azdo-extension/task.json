@@ -19,7 +19,7 @@
             "type": "string",
             "label": "Path that inclusivelint will run",
             "defaultValue": "",
-            "required": true,
+            "required": false,
             "helpMarkDown": "Path that inclusivelint will run"
         }
     ],
