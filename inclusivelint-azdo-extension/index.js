@@ -35,29 +35,57 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var taskLib = require("azure-pipelines-task-lib/task");
-var fs = require("fs");
+var tl = require("azure-pipelines-task-lib/task");
+var inclusivelint_1 = require("inclusivelint");
+var glob = require('glob').glob;
+var fs = __importStar(require("fs"));
+function prettyPrintResults(filePath, diagnostics) {
+    for (var _i = 0, diagnostics_1 = diagnostics; _i < diagnostics_1.length; _i++) {
+        var diagnostic = diagnostics_1[_i];
+        console.log(createMessage(filePath, diagnostic));
+    }
+}
+function createMessage(filePath, diagnostic) {
+    return "[Warning] " + filePath + ": Line " + diagnostic.lineNumber + " : The term " + diagnostic.term + " was found. Consider using " + diagnostic.suggestedTerms;
+}
 function run() {
     return __awaiter(this, void 0, void 0, function () {
-        var inputString;
+        var inputPath, listOfFiles, _i, listOfFiles_1, uniquePath, diagnostics, err_1;
         return __generator(this, function (_a) {
-            try {
-                inputString = taskLib.getInput('path', false);
-                if (inputString == 'bad') {
-                    taskLib.setResult(taskLib.TaskResult.Failed, 'Bad input was given');
-                    return [2 /*return*/];
-                }
-                console.log('Hello from inclusivelint');
-                console.log('This is the files I will be looking at');
-                fs.readdirSync(".").forEach(function (file) {
-                    console.log(file);
-                });
+            switch (_a.label) {
+                case 0:
+                    _a.trys.push([0, 5, , 6]);
+                    inputPath = tl.getInput('path', true);
+                    listOfFiles = glob.sync(inputPath + '/**/*');
+                    _i = 0, listOfFiles_1 = listOfFiles;
+                    _a.label = 1;
+                case 1:
+                    if (!(_i < listOfFiles_1.length)) return [3 /*break*/, 4];
+                    uniquePath = listOfFiles_1[_i];
+                    if (!fs.lstatSync(uniquePath).isFile()) return [3 /*break*/, 3];
+                    return [4 /*yield*/, inclusivelint_1.scanFile(uniquePath)];
+                case 2:
+                    diagnostics = _a.sent();
+                    prettyPrintResults(uniquePath, diagnostics);
+                    _a.label = 3;
+                case 3:
+                    _i++;
+                    return [3 /*break*/, 1];
+                case 4: return [3 /*break*/, 6];
+                case 5:
+                    err_1 = _a.sent();
+                    tl.setResult(tl.TaskResult.Failed, err_1.message);
+                    return [3 /*break*/, 6];
+                case 6: return [2 /*return*/];
             }
-            catch (err) {
-                taskLib.setResult(taskLib.TaskResult.Failed, err.message);
-            }
-            return [2 /*return*/];
         });
     });
 }
